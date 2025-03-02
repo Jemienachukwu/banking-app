@@ -54,7 +54,9 @@ const Sidebar = ({ user }: SiderbarProps) => {
               </Link>
             );
           })}
+          useer
         </nav>
+        useer
       </section>
     </div>
   );
