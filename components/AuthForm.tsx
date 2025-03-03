@@ -21,24 +21,25 @@ import {
 import { Input } from "@/components/ui/input";
 import CustomInput from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
-
-// const formSchema = z.object({
-//   email: z.string().email(),
-// });
+import { Loader2 } from "lucide-react";
 
 const AuthForm = ({ type }: { type: string }) => {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const form = useForm<z.infer<typeof authFormSchema>>({
-    resolver: zodResolver(authFormSchema),
+  const formSchema = authFormSchema(type);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof authFormSchema>) {
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
     console.log(values);
+    setIsLoading(false);
   }
 
   return (
@@ -77,6 +78,59 @@ const AuthForm = ({ type }: { type: string }) => {
           {" "}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              {type === "sign-up" && (
+                <>
+                  <div className="flex gap-4 justify-between ">
+                    <CustomInput
+                      control={form.control}
+                      name="firstName"
+                      placeholder="ex: John"
+                      lable="First Name"
+                    />
+                    <CustomInput
+                      control={form.control}
+                      name="lastName"
+                      placeholder="ex: Doe"
+                      lable="Last Name"
+                    />
+                  </div>
+                  <CustomInput
+                    control={form.control}
+                    name="address1"
+                    placeholder="Enter your specific address"
+                    lable="Address"
+                  />
+
+                  <div className="flex gap-4 justify-between ">
+                    <CustomInput
+                      control={form.control}
+                      name="state"
+                      placeholder="ex: Imo"
+                      lable="State"
+                    />
+                    <CustomInput
+                      control={form.control}
+                      name="postalCode"
+                      placeholder="ex: 1101"
+                      lable="Postal Code"
+                    />
+                  </div>
+                  <div className="flex gap-4 justify-between ">
+                    <CustomInput
+                      control={form.control}
+                      name="dateOfBirth"
+                      placeholder="yyyy-mm-dd"
+                      lable="Date Of Birth"
+                    />
+                    <CustomInput
+                      control={form.control}
+                      name="nin"
+                      placeholder="ex: 01234"
+                      lable="NIN"
+                    />
+                  </div>
+                </>
+              )}
               <CustomInput
                 control={form.control}
                 name="email"
@@ -89,12 +143,35 @@ const AuthForm = ({ type }: { type: string }) => {
                 placeholder="Enter your password"
                 lable="Password"
               />
-
-              <Button type="submit" className="form-btn">
-                Submit
-              </Button>
+              <div className="flex flex-col gap-4">
+                <Button type="submit" disabled={isLoading} className="form-btn">
+                  {isLoading ? (
+                    <>
+                      <Loader2 size={20} className="animate-spin" /> &nbsp;
+                      Loading ...
+                    </>
+                  ) : type === "sign-in" ? (
+                    "Sign-In"
+                  ) : (
+                    "Sign-Up"
+                  )}
+                </Button>
+              </div>
             </form>
           </Form>
+          <footer className="flex justify-center gap-1">
+            <p className="text-14 font-normal text-grey-600">
+              {type === "sign-in"
+                ? "Don't have an account?"
+                : "Already have an account?"}
+            </p>
+            <Link
+              href={type === "sign-in" ? "/sign-up" : "/sign-in"}
+              className="form-link"
+            >
+              {type === "sign-in" ? "Sign up" : "Sign in"}
+            </Link>
+          </footer>
         </>
       )}
     </section>
