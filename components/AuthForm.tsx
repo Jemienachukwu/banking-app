@@ -53,7 +53,7 @@ const AuthForm = ({ type }: { type: string }) => {
           state: data.state!,
           postalCode: data.postalCode!,
           dateOfBirth: data.dateOfBirth!,
-          nin: data.nin!,
+          ssn: data.ssn!,
           email: data.email,
           password: data.password,
         };
@@ -147,7 +147,7 @@ const AuthForm = ({ type }: { type: string }) => {
                     <CustomInput
                       control={form.control}
                       name="state"
-                      placeholder="ex: Imo"
+                      placeholder="ex:  NY"
                       lable="State"
                     />
                     <CustomInput
@@ -166,9 +166,9 @@ const AuthForm = ({ type }: { type: string }) => {
                     />
                     <CustomInput
                       control={form.control}
-                      name="nin"
+                      name="ssn"
                       placeholder="ex: 01234"
-                      lable="NIN"
+                      lable="SSN"
                     />
                   </div>
                 </>
