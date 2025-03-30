@@ -66,21 +66,10 @@ export const formatDateTime = (dateString: Date) => {
   };
 };
 // dollar formatter
-// export function formatAmount(amount: number): string {
-//   const formatter = new Intl.NumberFormat("en-US", {
-//     style: "currency",
-//     currency: "USD",
-//     minimumFractionDigits: 2,
-//   });
-
-//   return formatter.format(amount);
-// }
-
-// Naira formatter
 export function formatAmount(amount: number): string {
-  const formatter = new Intl.NumberFormat("en-NG", {
+  const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "NGN",
+    currency: "USD",
     minimumFractionDigits: 2,
   });
 

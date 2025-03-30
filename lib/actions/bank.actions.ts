@@ -97,9 +97,9 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
       institutionId: accountsResponse.data.item.institution_id!,
     });
 
-    const transactions = await getTransactions({
-      accessToken: bank?.accessToken,
-    });
+    // const transactions = await getTransactions({
+    //   accessToken: bank?.accessToken,
+    // });
 
     const account = {
       id: accountData.account_id,
@@ -115,7 +115,10 @@ export const getAccount = async ({ appwriteItemId }: getAccountProps) => {
     };
 
     // sort transactions by date such that the most recent transaction is first
-      const allTransactions = [...transactions, ...transferTransactions].sort(
+    const transactions =
+      (await getTransactions({ accessToken: bank?.accessToken })) || [];
+
+    const allTransactions = [...transactions, ...transferTransactions].sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     );
 
@@ -146,7 +149,7 @@ export const getInstitution = async ({
   }
 };
 
-// Get transactions
+//original Get transactions
 export const getTransactions = async ({
   accessToken,
 }: getTransactionsProps) => {
@@ -183,3 +186,51 @@ export const getTransactions = async ({
     console.error("An error occurred while getting the accounts:", error);
   }
 };
+// export const getTransactions = async ({
+//   accessToken,
+// }: getTransactionsProps) => {
+//   let hasMore = true;
+//   let transactions: any[] = [];
+//   let cursor: string | undefined = undefined;
+
+//   try {
+//     while (hasMore) {
+//       const response = await plaidClient.transactionsSync({
+//         access_token: accessToken,
+//         cursor, // Include cursor
+//       });
+
+//       const data = response.data;
+
+//       if (!data || !data.added) {
+//         console.error("Invalid transaction response:", data);
+//         return []; // Ensure it returns an empty array instead of undefined
+//       }
+
+//       transactions = [
+//         ...transactions,
+//         ...data.added.map((transaction) => ({
+//           id: transaction.transaction_id,
+//           name: transaction.name,
+//           paymentChannel: transaction.payment_channel,
+//           type: transaction.payment_channel,
+//           accountId: transaction.account_id,
+//           amount: transaction.amount,
+//           pending: transaction.pending,
+//           category: transaction.category ? transaction.category[0] : "",
+//           date: transaction.date,
+//           image: transaction.logo_url,
+//         })),
+//       ];
+
+//       cursor = data.next_cursor; // Store cursor for next request
+//       hasMore = data.has_more;
+//     }
+
+//     return transactions;
+//   } catch (error: any) {
+//     console.error("Plaid API Error Details:", error);
+//     console.error("Plaid API Error Response:", error?.response?.data);
+//     throw error; // Re-throw the error if necessary
+//   }
+// };
