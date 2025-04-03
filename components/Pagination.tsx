@@ -1,35 +1,35 @@
 "use client";
-
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-
 import { Button } from "@/components/ui/button";
-import { formUrlQuery } from "@/lib/utils";
 
-export const Pagination = ({ page, totalPages }: PaginationProps) => {
+interface PaginationProps {
+  page: number;
+  totalPages: number;
+}
+
+const Pagination = ({ page, totalPages }: PaginationProps) => {
   const router = useRouter();
-  const searchParams = useSearchParams()!;
+  const searchParams = useSearchParams();
 
   const handleNavigation = (type: "prev" | "next") => {
     const pageNumber = type === "prev" ? page - 1 : page + 1;
 
-    const newUrl = formUrlQuery({
-      params: searchParams.toString(),
-      key: "page",
-      value: pageNumber.toString(),
-    });
-    console.log("Generated URL:", newUrl);
-    router.push(newUrl, { scroll: false });
+    // Update the "page" query parameter in the URL
+    const params = new URLSearchParams(searchParams?.toString());
+    params.set("page", pageNumber.toString());
+
+    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   return (
-    <div className="flex justify-between gap-3">
+    <div className="flex justify-between items-center mt-4">
       <Button
-        size="lg"
-        variant="ghost"
-        className="p-0 hover:bg-transparent"
         onClick={() => handleNavigation("prev")}
-        disabled={Number(page) <= 1}
+        className="p-0 hover:bg-transparent"
+        disabled={page <= 1}
+        variant="ghost"
+        size="sm"
       >
         <Image
           src="/icons/arrow-left.svg"
@@ -38,17 +38,17 @@ export const Pagination = ({ page, totalPages }: PaginationProps) => {
           height={20}
           className="mr-2"
         />
-        Prev
+        Previous
       </Button>
-      <p className="text-14 flex items-center px-2">
-        {page} / {totalPages}
+      <p className="text-sm">
+        Page {page} of {totalPages}
       </p>
       <Button
-        size="lg"
-        variant="ghost"
-        className="p-0 hover:bg-transparent"
         onClick={() => handleNavigation("next")}
-        disabled={Number(page) >= totalPages}
+        className="p-0 hover:bg-transparent"
+        disabled={page >= totalPages}
+        variant="ghost"
+        size="sm"
       >
         Next
         <Image
@@ -62,3 +62,5 @@ export const Pagination = ({ page, totalPages }: PaginationProps) => {
     </div>
   );
 };
+
+export default Pagination;

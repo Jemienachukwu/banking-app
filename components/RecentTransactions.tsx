@@ -1,16 +1,28 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BankTabItem } from "./BankTabItem";
 import BankInfo from "./BankInfo";
 import TransactionsTable from "./TransactionsTable";
-import { Pagination } from "./Pagination";
+import Pagination from "./Pagination";
+import { useEffect, useState } from "react";
 
 const RecentTransactions = ({
   accounts,
   transactions = [],
   appwriteItemId,
-  page = 1,
 }: RecentTransactionsProps) => {
+  const searchParams = useSearchParams();
+  const [page, setPage] = useState(1);
+
+  // Update the page state when the query parameter changes
+  useEffect(() => {
+    const pageParam = searchParams.get("page");
+    setPage(pageParam ? parseInt(pageParam, 10) : 1);
+  }, [searchParams]);
+
   const rowsPerPage = 10;
   const totalPages = Math.ceil(transactions.length / rowsPerPage);
 
