@@ -38,7 +38,7 @@
 //     const { account } = await createAdminClient();
 //     const session = await account.createEmailPasswordSession(email, password);
 
-//     cookies().set("appwrite-session", session.secret, {
+//     (await cookies()).set("appwrite-session", session.secret, {
 //       path: "/",
 //       httpOnly: true,
 //       sameSite: "strict",
@@ -93,7 +93,7 @@
 
 //     const session = await account.createEmailPasswordSession(email, password);
 
-//     cookies().set("appwrite-session", session.secret, {
+//     (await cookies()).set("appwrite-session", session.secret, {
 //       path: "/",
 //       httpOnly: true,
 //       sameSite: "strict",
@@ -124,7 +124,7 @@
 //   try {
 //     const { account } = await createSessionClient();
 
-//     cookies().delete('appwrite-session');
+//     (await cookies()).delete('appwrite-session');
 
 //     await account.deleteSession('current');
 //   } catch (error) {
@@ -567,6 +567,26 @@ export const getBank = async ({ documentId }: getBankProps) => {
       BANK_COLLECTION_ID!,
       [Query.equal("$id", [documentId])]
     );
+
+    return parseStringify(bank.documents[0]);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getBankByAccountId = async ({
+  accountId,
+}: getBankByAccountIdProps) => {
+  try {
+    const { database } = await createAdminClient();
+
+    const bank = await database.listDocuments(
+      DATABASE_ID!,
+      BANK_COLLECTION_ID!,
+      [Query.equal("accountId", [accountId])]
+    );
+
+    if (bank.total !== 1) return null;
 
     return parseStringify(bank.documents[0]);
   } catch (error) {
