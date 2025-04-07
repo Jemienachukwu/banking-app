@@ -38,7 +38,7 @@
 //     const { account } = await createAdminClient();
 //     const session = await account.createEmailPasswordSession(email, password);
 
-//     cookies().set("appwrite-session", session.secret, {
+//     (await cookies()).set("appwrite-session", session.secret, {
 //       path: "/",
 //       httpOnly: true,
 //       sameSite: "strict",
@@ -93,7 +93,7 @@
 
 //     const session = await account.createEmailPasswordSession(email, password);
 
-//     cookies().set("appwrite-session", session.secret, {
+//     (await cookies()).set("appwrite-session", session.secret, {
 //       path: "/",
 //       httpOnly: true,
 //       sameSite: "strict",
@@ -124,7 +124,7 @@
 //   try {
 //     const { account } = await createSessionClient();
 
-//     cookies().delete('appwrite-session');
+//     (await cookies()).delete('appwrite-session');
 
 //     await account.deleteSession('current');
 //   } catch (error) {
@@ -330,9 +330,11 @@ export const getUserInfo = async ({ userId }: getUserInfoProps) => {
     console.log(error);
   }
 };
+
 export const signIn = async ({ email, password }: signInProps) => {
   try {
     const { account } = await createAdminClient();
+
     const session = await account.createEmailPasswordSession(email, password);
 
     (await cookies()).set("appwrite-session", session.secret, {
@@ -343,7 +345,6 @@ export const signIn = async ({ email, password }: signInProps) => {
     });
 
     const user = await getUserInfo({ userId: session.userId });
-
     return parseStringify(user);
   } catch (error) {
     console.error("Error", error);
@@ -405,7 +406,6 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
 export async function getLoggedInUser() {
   try {
     const { account } = await createSessionClient();
-
     const result = await account.get();
     const user = await getUserInfo({ userId: result.$id });
 
@@ -434,7 +434,7 @@ export const createLinkToken = async (user: User) => {
         client_user_id: user.$id,
       },
       client_name: `${user.firstName} ${user.lastName}`,
-      products: ["auth"] as Products[],
+      products: ["auth", "transactions"] as Products[],
       language: "en",
       country_codes: ["US"] as CountryCode[],
     };
@@ -567,6 +567,26 @@ export const getBank = async ({ documentId }: getBankProps) => {
       BANK_COLLECTION_ID!,
       [Query.equal("$id", [documentId])]
     );
+
+    return parseStringify(bank.documents[0]);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getBankByAccountId = async ({
+  accountId,
+}: getBankByAccountIdProps) => {
+  try {
+    const { database } = await createAdminClient();
+
+    const bank = await database.listDocuments(
+      DATABASE_ID!,
+      BANK_COLLECTION_ID!,
+      [Query.equal("accountId", [accountId])]
+    );
+
+    if (bank.total !== 1) return null;
 
     return parseStringify(bank.documents[0]);
   } catch (error) {
