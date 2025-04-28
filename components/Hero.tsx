@@ -4,17 +4,24 @@ import Lottie from "lottie-react";
 import gif from "./animations/Animation - 1745761704095.json";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 const Hero = () => {
   return (
-    <div className=" flex flex-col-reverse md:flex-row lg:flex-row items-center justify-evenly p-4 ">
+    <div className=" flex flex-col-reverse md:flex-row lg:flex-row items-center justify-between px-5 md:px-20 py-4 bg-gradient-to-b from-blue-50 to-[#f0f4f8] ">
       <div className="w-[100%] md:w-[40%] lg:w-[40%] flex flex-col gap-4">
-        <span className="bg-blue-200 p-1 rounded-md text-blue-500 font-semibold text-sm w-fit">
+        <span className="flex items-center gap-1 bg-blue-200 px-2 py-1 rounded-md text-blue-600 font-semibold text-xs w-fit">
+          <Image
+            src="/icons/safe-shield-protection-svgrepo-com.svg"
+            width={12}
+            height={12}
+            alt="connect"
+          />
           Connect. Track. Grow.
         </span>
         <h1 className="text-4xl font-bold ">
           All Your Finances, Finally Together.
         </h1>
-        <p>
+        <p className="text-sm ">
           Manage your spending across all your bank accounts with security and
           simplicity at the heart of everything.
         </p>
@@ -23,22 +30,20 @@ const Hero = () => {
             href="/sign-up"
             className="cursor-pointer flex items-center gap-1 "
           >
-            <Button className="form-btn ">create account</Button>
-          </Link>
-          <Link
-            href="/sign-in"
-            className="cursor-pointer flex items-center gap-1 "
-          >
-            <Button className="border-2 border-solid">sign-in</Button>
+            <Button className="form-btn ">Get Started Free</Button>
           </Link>
         </div>
         <hr />
-        <div className="flex flex-col gap-4">
-          <p>Features</p>
-
+        <div className="flex flex-col gap-4 p-3 bg-white rounded-md shadow-sm ">
           <div className="flex  items-center gap-2 text-sm">
-            <span className="h-8 w-8 bg-blue-400 rounded-sm text-white">
-              icon
+            <span className="h-8 w-8 bg-blue-200 rounded-sm text-blue-600 flex items-center justify-center">
+              <Image
+                src="/icons/link.svg"
+                width={20}
+                height={20}
+                alt="connect"
+                className="m-2 min-w-5 text-red-700"
+              />
             </span>
             <div>
               <p className="font-bold">Connect</p>
