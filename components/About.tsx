@@ -50,7 +50,7 @@ const About = () => {
         <div className="flex flex-col gap-2 ">
           <span className="h-8 w-8 bg-blue-200 rounded-sm text-blue-600 flex items-center justify-center">
             <Image
-              src="/icons/budget3.svg"
+              src="/icons/budget.svg"
               width={20}
               height={20}
               alt="connect"
