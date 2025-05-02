@@ -54,7 +54,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
           </SheetTitle>
 
           <Link
-            href="/"
+            href="/dashboard"
             className="cursor-pointer flex items-center gap-1 px-4"
           >
             <Image

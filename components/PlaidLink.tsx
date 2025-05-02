@@ -34,7 +34,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
         user,
       });
 
-      router.push("/");
+      router.push("/dashboard");
     },
     [user]
   );
