@@ -1,11 +1,20 @@
-import React from "react";
+import About from "@/components/About";
 import Hero from "@/components/Hero";
 import Nav from "@/components/Nav";
-import About from "@/components/About";
+import React from "react";
 
-const LandingPage = () => {
+import { getLoggedInUser } from "@/lib/actions/user.actions";
+import { redirect } from "next/navigation";
+
+const page = async () => {
+  const loggedIn = await getLoggedInUser();
+
+  if (loggedIn) {
+    redirect("/dashboard");
+  }
+
   return (
-    <div className="bg-white">
+    <div>
       <Nav />
       <Hero />
       <About />
@@ -13,4 +22,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default page;

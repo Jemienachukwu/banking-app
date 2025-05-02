@@ -66,7 +66,7 @@ const AuthForm = ({ type }: { type: string }) => {
           password: data.password,
         });
         if (response) {
-          router.push("/");
+          router.push("/dashboard");
         }
       }
     } catch (error) {
@@ -79,7 +79,10 @@ const AuthForm = ({ type }: { type: string }) => {
   return (
     <section className="auth-form">
       <header className="flex flex-col gap-5 md:gap-8">
-        <Link href="/" className="cursor-pointer flex items-center gap-1 ">
+        <Link
+          href="/dashboard"
+          className="cursor-pointer flex items-center gap-1 "
+        >
           <Image
             src="/icons/logo.svg"
             width={34}
