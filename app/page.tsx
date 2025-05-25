@@ -5,6 +5,7 @@ import React from "react";
 
 import { getLoggedInUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
+import AboutCard from "@/components/AboutCard";
 
 const page = async () => {
   const loggedIn = await getLoggedInUser();
@@ -18,6 +19,7 @@ const page = async () => {
       <Nav />
       <Hero />
       <About />
+      <AboutCard />
     </div>
   );
 };
