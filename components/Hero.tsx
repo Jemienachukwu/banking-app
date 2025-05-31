@@ -8,7 +8,7 @@ import Image from "next/image";
 const Hero = () => {
   return (
     // bg-gradient-to-b from-[#fff] to-blue-200
-    <div className=" flex flex-col-reverse md:flex-row lg:flex-row items-center justify-between px-5 md:px-20 py-4 bg-[#fbf8e9] h-screen rounded-b-[80px]  ">
+    <div className=" flex flex-col-reverse md:flex-row lg:flex-row items-center justify-between px-5 md:px-20 py-4 bg-[#fff] shadow-2xl h-screen rounded-b-[80px]  ">
       <div className="w-[100%] md:w-[40%] lg:w-[40%] flex flex-col gap-4">
         <span className="flex items-center gap-1 bg-blue-200 px-2 py-1 rounded-md text-blue-600 font-semibold text-xs w-fit">
           <Image
