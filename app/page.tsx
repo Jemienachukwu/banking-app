@@ -6,6 +6,7 @@ import React from "react";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 import AboutCard from "@/components/AboutCard";
+import GetStarted from "@/components/GetStarted";
 
 const page = async () => {
   const loggedIn = await getLoggedInUser();
@@ -20,6 +21,7 @@ const page = async () => {
       <Hero />
       <About />
       <AboutCard />
+      <GetStarted />
     </div>
   );
 };
