@@ -25,7 +25,7 @@ const AboutCard = () => {
       subtext:
         "Bring all your financial accounts under one roof. Link multiple bank accounts, credit cards, and digital wallets securely and instantly. Our smart dashboard gives you a real-time, unified view of your entire financial life no switching apps, no missed balances.",
       progress: progress1,
-      bg: 50,
+      bg: 100,
       gif: gif1,
     },
     {
@@ -49,19 +49,27 @@ const AboutCard = () => {
   return (
     <div
       ref={ref}
-      className="h-[300vh] relative flex flex-col items-center justify-center"
+      className="h-[250vh] relative flex flex-col items-center justify-center my-20"
     >
+      <div className="flex flex-col gap-4 text-center my-10">
+        <h1 className="text-3xl font-bold ">Discover What We Offer</h1>
+        <p className="text-xl text-gray-600">
+          Elevate your e-commerce experience with our powerful feature set
+          designed for unparalleled excellence.
+        </p>
+      </div>
+
       {cards.map((item, index) => {
         const start = index / cards.length;
         const end = (index + 1) / cards.length;
 
         // Last card should not fade
-        const isLast = index === cards.length - 1;
+        // const isLast = index === cards.length - 1;
 
-        // Slight fade for previous cards — stops at 0.4
-        const opacity = isLast
-          ? 1
-          : useTransform(scrollYProgress, [end - 0.05, end], [1, 0.4]);
+        // // Slight fade for previous cards — stops at 0.4
+        // const opacity = isLast
+        //   ? 1
+        //   : useTransform(scrollYProgress, [end - 0.05, end], [1, 0.4]);
 
         const scale = useTransform(scrollYProgress, [start, end], [1, 0.97]);
         const y = useTransform(scrollYProgress, [start, end], [0, 20]);
@@ -69,7 +77,7 @@ const AboutCard = () => {
         return (
           <motion.div
             key={index}
-            style={{ opacity, scale, y }}
+            // style={{ opacity, scale, y }}
             className={`sticky top-20 z-[${10 + index}] 
             h-[80vh] flex flex-col md:flex-row items-center justify-evenly px-5 py-10 bg-blue-${
               item.bg

@@ -5,7 +5,7 @@
 import { motion } from "framer-motion";
 import gif1 from "./animations/Animation - 1748704692968.json";
 import gif2 from "./animations/Animation - 1748707193106.json";
-import gif3 from "./animations/Animation - 1748647528882.json";
+import gif3 from "./animations/Animation - 1748647528882 (1).json";
 
 import Lottie from "lottie-react";
 
@@ -71,13 +71,15 @@ const GetStarted = () => {
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              className="bg-white flex flex-col justify-between p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              className="bg-white flex flex-col justify-between  rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
               variants={itemVariants}
             >
-              <div className="w-48 h-48 object-contain mx-auto">
-                <Lottie animationData={step.gif} loop={true} />
+              <div className="w-full bg-blue-300 rounded-t-xl">
+                <div className="w-48 h-48 object-contain mx-auto ">
+                  <Lottie animationData={step.gif} loop={true} />
+                </div>
               </div>
-              <div className="">
+              <div className="p-6">
                 <h4 className="text-xl font-semibold mb-2">
                   {`Step ${index + 1}`}
                 </h4>

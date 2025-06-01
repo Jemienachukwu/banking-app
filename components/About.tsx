@@ -24,7 +24,7 @@ const About = () => {
   ];
   return (
     <div className="px-5 md:px-20 pt-10 flex flex-col gap-4 bg-[#fff]">
-      <div className="w-[70%] md:w-[40%] flex flex-col gap-4">
+      <div className="flex flex-col gap-4 text-center">
         <h1 className="text-2xl font-bold ">
           Take Full Control of Your Finances, Without the Stress
         </h1>
