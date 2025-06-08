@@ -84,8 +84,8 @@ const AboutCard = () => {
             }  w-[90%] rounded-3xl shadow-xl transition-all duration-300`}
           >
             <div className="w-full md:w-1/2 space-y-4">
-              <h1 className="text-4xl font-bold">{item.title}</h1>
-              <p className="text-lg text-gray-600">{item.subtext}</p>
+              <h1 className="text-3xl font-bold">{item.title}</h1>
+              <p className="text-base text-gray-600">{item.subtext}</p>
             </div>
             <div className="w-full md:w-1/3">
               <Lottie animationData={item.gif} loop />
