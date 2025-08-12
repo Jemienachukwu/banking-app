@@ -27,6 +27,7 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
         const accountsResponse = await plaidClient.accountsGet({
           access_token: bank.accessToken,
         });
+        console.log("Access Token: ", bank.accessToken);
         const accountData = accountsResponse.data.accounts[0];
 
         // get institution info from plaid
