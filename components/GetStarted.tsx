@@ -3,9 +3,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import gif3 from "./animations/Business Task Management.json";
-import gif1 from "./animations/Female accountant.json";
-import gif2 from "./animations/Researchers.json";
+// import gif1 from "./animations/Female accountant.json";
+// import gif3 from "./animations/Business Task Management.json";
+// import gif2 from "./animations/Researchers.json";
+import gif1 from "./animations/blue-accountant.json";
+
+import gif2 from "./animations/blue-research.json";
+import gif3 from "./animations/blue-business.json";
 
 import Lottie from "lottie-react";
 
@@ -32,7 +36,7 @@ const steps = [
 
 const GetStarted = () => {
   return (
-    <section className="flex flex-col items-center px-5 py-12 space-y-12">
+    <section className="flex flex-col items-center px-5 py-12 space-y-12 bg-[#f8fafc]">
       {steps.map((step, index) => (
         <div
           key={index}
