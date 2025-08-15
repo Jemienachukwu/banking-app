@@ -6,10 +6,11 @@ import gif from "./animations/Animation - 1745761704095.json";
 // import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "./ui/button";
 const Hero = () => {
   return (
     <>
-      <div className=" flex flex-col md:flex-row lg:flex-row items-center justify-between px-5 md:px-20 py-20 bg-[#fff] h-screen  ">
+      <div className=" flex flex-col md:flex-row items-center justify-between px-5 md:px-20 pt-20 md:pt-2 bg-[#fff] md:h-screen ">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -25,21 +26,22 @@ const Hero = () => {
             />
             Connect. Track. Grow.
           </span>
-          <h1 className="text-4xl font-bold ">
+
+          <h1 className="text-blue-600 text-4xl md:text-5xl font-bold ">
             All Your Finances, Finally Together.
           </h1>
-          <p className="text-sm ">
+          <p className="text-lg text-gray-700">
             Manage your spending across all your bank accounts with security and
             simplicity at the heart of everything.
           </p>
-          <div className="flex gap-4 ">
-            <Link
-              href="/sign-up"
-              className="cursor-pointer flex items-center gap-1 "
-            >
-              <button className="form-btn ">Get Started Free</button>
-            </Link>
-          </div>
+
+          <Link
+            href="/sign-up"
+            className="cursor-pointer flex items-center gap-1 "
+          >
+            <Button className="form-btn ">Get Started Free</Button>
+          </Link>
+
           <hr />
           <div className="flex flex-col gap-4 p-3 bg-white rounded-md shadow-sm ">
             <div className="flex  items-center gap-2 text-sm">
@@ -63,9 +65,9 @@ const Hero = () => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-[100%] md:w-[40%] lg:w-[40%]"
+          className="w-[100%] md:w-[50%] lg:w-[50%] "
         >
-          <Lottie animationData={gif} loop={true} />
+          <Lottie animationData={gif} loop={true} className="md:h-[80vh]" />
         </motion.div>
       </div>
     </>

@@ -20,6 +20,7 @@ const AboutCard = () => {
       subtext:
         "Bring all your financial accounts under one roof. Link multiple bank accounts, credit cards, and digital wallets securely and instantly. Our smart dashboard gives you a real-time, unified view of your entire financial life—no switching apps, no missed balances.",
       gif: gif1,
+
       bg: "#E0F2FE", // blue-100
       blob: "#93C5FD", // blue-300
     },
@@ -44,13 +45,15 @@ const AboutCard = () => {
   return (
     <div
       ref={ref}
-      className="h-[250vh] relative flex flex-col items-center justify-center my-20"
+      className="h-[250vh] relative flex flex-col items-center justify-center mb-20 px-5 md:px-20 bg-[#f8fafc]"
     >
       <div className="flex flex-col gap-4 text-center my-10">
-        <h1 className="text-2xl font-bold">Discover What We Offer</h1>
-        <p className="text-xl text-gray-600">
-          Elevate your finance experience with our powerful feature set designed
-          for unparalleled excellence.
+        <h1 className="text-3xl font-bold">
+          Explore Our <span className="text-blue-600"> Features</span>
+        </h1>
+        <p className="text-xl text-gray-600 md:w-[95%] text-center mx-auto">
+          Enhance your financal journey with tools crafterd for exceptional
+          perfromance
         </p>
       </div>
 

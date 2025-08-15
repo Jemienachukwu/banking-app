@@ -8,7 +8,7 @@ const LandingFooter = () => {
         className="relative top-[120px] h-[300px] w-full bg-cover bg-center"
         style={{ backgroundImage: "url('assets/footerTop.png')" }}
       ></div>
-      <div className="absolute flex gap-8 flex-col md:flex-row justify-between bg-[#4386AE] h-fit md:h-[400px] z-20 w-full text-white px-4  md:px-20 py-10 ">
+      <div className="absolute flex gap-8 flex-col md:flex-row justify-between bg-[#4386AE] h-fit md:h-[400px] z-20 w-full text-white px-5  md:px-20 py-10 ">
         <div className="w-full md:w-[30%] flex flex-col justify-between ">
           <div className="flex flex-col gap-3">
             <span>
