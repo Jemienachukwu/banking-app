@@ -3,9 +3,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import gif1 from "./animations/Animation - 1748704692968.json";
-import gif2 from "./animations/Animation - 1748707193106.json";
-import gif3 from "./animations/Animation - 1748647528882 (1).json";
+// import gif1 from "./animations/Female accountant.json";
+// import gif3 from "./animations/Business Task Management.json";
+// import gif2 from "./animations/Researchers.json";
+import gif1 from "./animations/blue-accountant.json";
+
+import gif2 from "./animations/blue-research.json";
+import gif3 from "./animations/blue-business.json";
 
 import Lottie from "lottie-react";
 
@@ -13,85 +17,93 @@ const steps = [
   {
     title: "Create Your Account",
     description:
-      "Sign up in minutes to unlock money management tools tailored for you.",
-
+      "Get started in just a few clicks. Whether you're managing your salary, side hustle, or student budget, our platform is built to simplify your financial life.",
     gif: gif1,
   },
   {
     title: "Link Your Bank Accounts",
     description:
-      "Securely connect all your existing banks and wallets for a unified financial view.",
+      "Easily and securely connect all your bank accounts and wallets in one place. No more switching apps or guessing balances get a real-time, complete view of your money whenever you need it.",
     gif: gif2,
   },
   {
     title: "Track and Manage Your Money",
     description:
-      "Stay on top of your spending, set goals, and make confident financial decisions.",
+      "See where your money goes, set personalized budgets, and reach your goals faster. From daily expenses to long-term savings, our smart tools keep you in control every step of the way.",
     gif: gif3,
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.3,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
-
 const GetStarted = () => {
   return (
-    <section className="py-20 bg-gray-50 mt-20">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="text-4xl font-bold mb-4">Get Started In Just</h2>
-        <h3 className="text-4xl font-bold text-blue-500 mb-12">
-          3 Simple Steps
-        </h3>
-
-        <motion.div
-          className="grid md:grid-cols-3 gap-12"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+    <section className="flex flex-col items-center px-5  md:px-20 space-y-12 bg-[#f8fafc]">
+      {steps.map((step, index) => (
+        <div
+          key={index}
+          className={`flex flex-col  
+            ${index % 2 !== 0 ? "md:flex-row-reverse" : "md:flex-row"} 
+          items-center md:items-center md:justify-between gap-10 max-w-6xl w-full`}
         >
-          {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              className="bg-white flex flex-col justify-between  rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
-              variants={itemVariants}
-            >
-              <div className="w-full bg-blue-300 rounded-t-xl">
-                <div className="w-48 h-48 object-contain mx-auto ">
-                  <Lottie animationData={step.gif} loop={true} />
-                </div>
-              </div>
-              <div className="p-6">
-                <h4 className="text-xl font-semibold mb-2">
-                  {`Step ${index + 1}`}
-                </h4>
-                <h5 className="text-lg font-medium text-gray-700 mb-2">
-                  {step.title}
-                </h5>
-                <p className="text-gray-600">{step.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
+          {/* Text Content */}
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.15 }}
+            className="flex-1 space-y-4"
+          >
+            <p className="text-sm font-medium text-blue-600 uppercase trackingWidest">
+              Step 0{index + 1}
+            </p>
+
+            <h2 className="text-3xl md:text-4xl font-bold leading-tight tracking-tight text-gray-900">
+              {step.title}
+            </h2>
+
+            <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+              {step.description}
+            </p>
+
+            <button className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-semibold text-sm shadow-md transition duration-200 group">
+              Get Started For Free
+              <svg
+                className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </motion.div>
+
+          {/* Animation */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.25 }}
+            className="flex-1 flex justify-center"
+          >
+            <div className="w-full max-w-md h-auto">
+              <Lottie animationData={step.gif} loop={true} />
+            </div>
+          </motion.div>
+        </div>
+      ))}
+      <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+        <path
+          fill="#f8fafc"
+          fillOpacity="1"
+          d="M0,96L80,128C160,160,320,224,480,250.7C640,277,800,267,960,256C1120,245,1280,235,1360,229.3L1440,224L1440,320L0,320Z"
+        ></path>
+      </svg>
     </section>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 
-import { useScroll, useTransform, motion, pipe } from "framer-motion";
 import { useRef } from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
 import Lottie from "lottie-react";
 import gif1 from "./animations/Animation - 1748042058811 (1).json";
 import gif2 from "./animations/Animation - 1748705985352.json";
@@ -14,48 +14,46 @@ const AboutCard = () => {
     offset: ["start start", "end end"],
   });
 
-  // Map global scroll progress into three segments for the 3 cards
-  const progress1 = useTransform(scrollYProgress, [0, 0.33], [0, 1]);
-  const progress2 = useTransform(scrollYProgress, [0.33, 0.66], [0, 1]);
-  const progress3 = useTransform(scrollYProgress, [0.66, 1], [0, 1]);
-
   const cards = [
     {
       title: "Manage All Your Connections Effortlessly",
       subtext:
-        "Bring all your financial accounts under one roof. Link multiple bank accounts, credit cards, and digital wallets securely and instantly. Our smart dashboard gives you a real-time, unified view of your entire financial life no switching apps, no missed balances.",
-      progress: progress1,
-      bg: 100,
+        "Bring all your financial accounts under one roof. Link multiple bank accounts, credit cards, and digital wallets securely and instantly. Our smart dashboard gives you a real-time, unified view of your entire financial life—no switching apps, no missed balances.",
       gif: gif1,
+
+      bg: "#E0F2FE", // blue-100
+      blob: "#93C5FD", // blue-300
     },
     {
       title: "Track Your Spending with Total Clarity",
       subtext:
         "Know exactly where your money goes, always. Automatically categorize your transactions and track your expenses across accounts. From daily coffee runs to monthly bills, you’ll get clean summaries, helpful trends, and powerful insights that help you make better financial choices.",
-      progress: progress2,
-      bg: 300,
       gif: gif2,
+      bg: "#EFF6FF", // blue-50
+      blob: "#BFDBFE", // blue-200
     },
     {
       title: "Stay In Control of Your Finances",
       subtext:
         "Set goals, stay on budget, and feel confident about your money. Create personalized budgets, receive instant alerts when you overspend, and get actionable tips tailored to your habits.",
-      progress: progress3,
-      bg: 200,
       gif: gif3,
+      bg: "#DBEAFE", // indigo-100
+      blob: "#A5B4FC", // indigo-300
     },
   ];
 
   return (
     <div
       ref={ref}
-      className="h-[250vh] relative flex flex-col items-center justify-center my-20"
+      className="h-[250vh] relative flex flex-col items-center justify-center mb-20 px-5 md:px-20 bg-[#f8fafc]"
     >
       <div className="flex flex-col gap-4 text-center my-10">
-        <h1 className="text-3xl font-bold ">Discover What We Offer</h1>
-        <p className="text-xl text-gray-600">
-          Elevate your e-commerce experience with our powerful feature set
-          designed for unparalleled excellence.
+        <h1 className="text-3xl font-bold">
+          Explore Our <span className="text-blue-600"> Features</span>
+        </h1>
+        <p className="text-xl text-gray-600 md:w-[95%] text-center mx-auto">
+          Enhance your financal journey with tools crafterd for exceptional
+          perfromance
         </p>
       </div>
 
@@ -63,33 +61,49 @@ const AboutCard = () => {
         const start = index / cards.length;
         const end = (index + 1) / cards.length;
 
-        // Last card should not fade
-        // const isLast = index === cards.length - 1;
-
-        // // Slight fade for previous cards — stops at 0.4
-        // const opacity = isLast
-        //   ? 1
-        //   : useTransform(scrollYProgress, [end - 0.05, end], [1, 0.4]);
-
-        const scale = useTransform(scrollYProgress, [start, end], [1, 0.97]);
-        const y = useTransform(scrollYProgress, [start, end], [0, 20]);
+        const scale = useTransform(scrollYProgress, [start, end], [1.05, 1]);
+        const y = useTransform(scrollYProgress, [start, end], [-30, 0]);
 
         return (
           <motion.div
             key={index}
-            // style={{ opacity, scale, y }}
-            className={`sticky top-20 z-[${10 + index}] 
-            h-[80vh] flex flex-col md:flex-row items-center justify-evenly px-5 py-10 bg-blue-${
-              item.bg
-            }  w-[90%] rounded-3xl shadow-xl transition-all duration-300`}
+            style={{
+              scale,
+              y,
+              backgroundColor: item.bg,
+              zIndex: 10 + index,
+            }}
+            className="sticky top-20 h-[80vh] flex flex-col md:flex-row items-center justify-evenly mt-10 px-5 py-10 w-[90%] rounded-3xl shadow-xl transition-all duration-300"
           >
-            <div className="w-full md:w-1/2 space-y-4">
-              <h1 className="text-3xl font-bold">{item.title}</h1>
-              <p className="text-base text-gray-600">{item.subtext}</p>
+            {/* Blob */}
+            <div
+              className="absolute -bottom-1 -right-10 w-40 h-40 rounded-full opacity-20 blur-3xl z-0"
+              style={{ backgroundColor: item.blob }}
+            />
+
+            {/* Text */}
+            <div className="z-10">
+              <div className="mb-4 inline-flex items-center justify-center w-12 h-12 bg-indigo-100 text-indigo-700 rounded-xl text-xl">
+                💳
+              </div>
+              <h2 className="text-3xl font-semibold text-gray-900 mb-4">
+                {item.title}
+              </h2>
+              <p className="text-gray-600 text-base leading-relaxed max-w-md">
+                {item.subtext}
+              </p>
             </div>
+
+            {/* Lottie */}
             <div className="w-full md:w-1/3">
               <Lottie animationData={item.gif} loop />
             </div>
+
+            {/* Blob */}
+            <div
+              className="absolute -top-1 -left-10 w-40 h-40 rounded-full opacity-20 blur-3xl z-0"
+              style={{ backgroundColor: item.blob }}
+            />
           </motion.div>
         );
       })}

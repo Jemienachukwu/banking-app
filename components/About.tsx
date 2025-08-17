@@ -23,12 +23,12 @@ const About = () => {
     },
   ];
   return (
-    <div className="px-5 md:px-20 pt-10 flex flex-col gap-4 bg-[#fff]">
+    <div className="px-5 md:px-20 pt-10 flex flex-col gap-4 bg-blue-600 text-slate-100">
       <div className="flex flex-col gap-4 text-center">
         <h1 className="text-2xl font-bold ">
           Take Full Control of Your Finances, Without the Stress
         </h1>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-slate-200">
           All your banks, all your transactions, all your insights beautifully
           organized to help you spend smarter and save more.
         </p>
@@ -44,7 +44,7 @@ const About = () => {
                 : ""
             }`}
           >
-            <span className="h-8 w-8 bg-blue-200 rounded-sm text-blue-600 flex items-center justify-center">
+            <span className="h-8 w-8 bg-blue-50 rounded-sm text-blue-600 flex items-center justify-center">
               <Image
                 src={item.icon}
                 width={20}
@@ -54,7 +54,7 @@ const About = () => {
               />
             </span>
             <h2 className="text-lg font-bold">{item.title}</h2>
-            <p className="text-sm text-gray-600">{item.description}</p>
+            <p className="text-sm text-gray-100">{item.description}</p>
           </div>
         ))}
       </div>
